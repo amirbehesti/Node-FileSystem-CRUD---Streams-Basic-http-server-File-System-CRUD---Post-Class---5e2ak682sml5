@@ -11,29 +11,25 @@ const myFileWriter = async (fileName, fileContent) => {
   console.log('Saved!');
 });
 }
-myFileWriter("input.txt", "Hello");
 const myFileReader = async (fileName) => {
 	// write code here
 	// dont chnage function name
-	await fs.readFile(fileName, 'utf8', function(err, data){
-		if (err) {
-		  console.error(err);
-		  return;
-		}
+	try {
+		const data = await fs.readFile(fileName, { encoding: 'utf8' });
 		console.log(data);
-	  });
+	  } catch (err) {
+		console.log(err);
+	  }
 }
 
 const myFileUpdater = async (fileName, fileContent) => {
 	// write code here
 	// dont chnage function name
-	await fs.appendFile(fileName, fileContent, function (err) {
-		if (err){
-			console.error(err);
-			return;
-		}
-		console.log('Updated!');
-	  });
+	try {
+	await fs.appendFile(fileName, fileContent);
+	}catch (err) {
+		console.log(err);
+	  }
 }
 
 const myFileDeleter = async (fileName) => {
